@@ -7,13 +7,9 @@ import static spark.Spark.post;
 public class HotfudgeAPI {
 	
 	public static void main(String[] args) {
+		
 		get("/sundaes", (req, res) -> {
 			//TODO: retrieve all HotFudgeSundaes
-			return null;
-		});
-		
-		get("/sundaes/:id", (req, res) -> {
-			//TODO: retrieve HotFudgeSundae with given id
 			return null;
 		});
 		
@@ -22,15 +18,21 @@ public class HotfudgeAPI {
 			return null;
 		});
 		
-		get("/reviews/:sundaeId", (req, res) -> {
+		get("/sundaes/:id", (req, res) -> {
+			//TODO: retrieve HotFudgeSundae with given id
+			return null;
+		});
+		
+		get("/sundaes/:id/reviews", (req, res) -> {
 			//TODO: retrieve all reviews for a HotFudgeSundae with given id
 			return null;
 		});
 		
-		post("/reviews", (req, res) -> {
-			//TODO: create a review for a given HotFudgeSundae
+		post("/sundaes/:id/reviews", (req, res) -> {
+			//TODO: create a review for a HotFudgeSundae with given id
 			return null;
 		});
+		
 	}
 	
 }
