@@ -6,6 +6,7 @@ import java.util.List;
 import com.bubbles.hotfudge.Review;
 
 //TODO: Swap out with a database implementation
+//TODO: Unit tests
 public class GenericReviewDAO implements ReviewDAO {
 	
 	ArrayList<Review> reviews = new ArrayList<Review>();
