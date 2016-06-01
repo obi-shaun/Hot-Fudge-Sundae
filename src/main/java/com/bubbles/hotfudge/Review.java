@@ -1,13 +1,12 @@
 package com.bubbles.hotfudge;
 
 public class Review {
+	
 	private String comment;
 	private int rating;
-	//TODO: define using an enum?/////
 	private static final int CHARACTER_LIMIT = 140;
 	private static final int MINIMUM_RATING = 1;
 	private static final int MAXIMUM_RATING = 5;
-	/////////////////////////////////
 	private int sundaeId;
 
 	public Review(String comment, int rating) {
