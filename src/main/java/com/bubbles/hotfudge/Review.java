@@ -3,9 +3,11 @@ package com.bubbles.hotfudge;
 public class Review {
 	private String comment;
 	private int rating;
-	private final int CHARACTER_LIMIT = 140;
-	private final int MINIMUM_RATING = 1;
-	private final int MAXIMUM_RATING = 5;
+	//TODO: define using an enum?/////
+	private static final int CHARACTER_LIMIT = 140;
+	private static final int MINIMUM_RATING = 1;
+	private static final int MAXIMUM_RATING = 5;
+	/////////////////////////////////
 	private int sundaeId;
 
 	public Review(String comment, int rating) {
@@ -37,6 +39,18 @@ public class Review {
 		return sundaeId;
 	}
 
+	public static int getCharacterLimit() {
+		return CHARACTER_LIMIT;
+	}
+	
+	public static int getMaximumRating() {
+		return MAXIMUM_RATING;
+	}
+	
+	public static int getMinimumRating() {
+		return MINIMUM_RATING;
+	}
+
 	private String enforceCharacterLimit(String comment) {
 		int commentLength = comment.length();
 		if (commentLength > CHARACTER_LIMIT) { 
@@ -54,6 +68,8 @@ public class Review {
 		}
 		return rating;
 	}
+	
+	//TODO: override toString()
 	
 }
 

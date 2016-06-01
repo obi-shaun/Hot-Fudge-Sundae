@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.bubbles.hotfudge.Review;
 
-public class ReviewDB implements ReviewDAO {
+//TODO: Swap out with a database implementation
+public class GenericReviewDAO implements ReviewDAO {
+	
 	ArrayList<Review> reviews = new ArrayList<Review>();
 
 	@Override

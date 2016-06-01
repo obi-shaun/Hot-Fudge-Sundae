@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.bubbles.hotfudge.HotFudgeSundae;
 
-public class HotFudgeSundaeDB implements HotFudgeSundaeDAO {
+//TODO: Swap out with a database implementation
+public class GenericHotFudgeSundaeDAO implements HotFudgeSundaeDAO {
+	
 	ArrayList<HotFudgeSundae> sundaes = new ArrayList<HotFudgeSundae>();
 
 	@Override
