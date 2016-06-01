@@ -18,7 +18,7 @@ public class ReviewTest {
 		assertEquals(validCommentLength, validReview.getComment().length());
 	}
 	
-	//TODO: Come up with more descriptive names
+	//TODO: Come up with more descriptive name
 	@Test
 	public void negativeTest() {
 		int invalidCommentLength = 200;
