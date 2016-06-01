@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class ReviewTest {	
 	
+	//TODO: Come up with more descriptive name
 	@Test
 	public void positiveTest() {
 		int validCommentLength = 50;
@@ -17,6 +18,7 @@ public class ReviewTest {
 		assertEquals(validCommentLength, validReview.getComment().length());
 	}
 	
+	//TODO: Come up with more descriptive names
 	@Test
 	public void negativeTest() {
 		int invalidCommentLength = 200;
