@@ -9,17 +9,18 @@ public class Review {
 	private static final int MINIMUM_RATING = 1;
 	private static final int MAXIMUM_RATING = 5;
 
-	public Review(String comment, int rating) {
-		this.comment = enforceCharacterLimit(comment);
-		this.rating = enforceRatingLimit(rating);	
+	public Review(String comment, int rating, int sundaeId) {
+		this.comment = validateComment(comment);
+		this.rating = validateRating(rating);
+		this.sundaeId = sundaeId;
 	}
 	
 	public void setComment(String comment) {
-		this.comment = enforceCharacterLimit(comment);
+		this.comment = validateComment(comment);
 	}
 	
 	public void setRating(int rating) {
-		this.rating = enforceRatingLimit(rating);
+		this.rating = validateRating(rating);
 	}
 	
 	public void setSundaeId(int sundaeId) {
@@ -50,7 +51,7 @@ public class Review {
 		return MINIMUM_RATING;
 	}
 
-	private String enforceCharacterLimit(String comment) {
+	private String validateComment(String comment) {
 		int commentLength = comment.length();
 		if (commentLength > CHARACTER_LIMIT) { 
 			return comment.substring(0, CHARACTER_LIMIT);
@@ -58,7 +59,7 @@ public class Review {
 		return comment;
 	}
 	
-	private int enforceRatingLimit(int rating) {
+	private int validateRating(int rating) {
 		if (rating < MINIMUM_RATING){
 			return MINIMUM_RATING;
 		}
@@ -66,6 +67,44 @@ public class Review {
 			return MAXIMUM_RATING;
 		}
 		return rating;
+	}
+	
+	private boolean validateSundaeId(int sundaeId) {
+		//TODO: implement validation of sundaeId
+		return false;
+	}
+
+	//TODO: review Eclipse auto generated hashCode()
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+		result = prime * result + rating;
+		result = prime * result + sundaeId;
+		return result;
+	}
+
+	//TODO: review Eclipse auto generated equals()
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Review other = (Review) obj;
+		if (comment == null) {
+			if (other.comment != null)
+				return false;
+		} else if (!comment.equals(other.comment))
+			return false;
+		if (rating != other.rating)
+			return false;
+		if (sundaeId != other.sundaeId)
+			return false;
+		return true;
 	}
 	
 	//TODO: override toString()
