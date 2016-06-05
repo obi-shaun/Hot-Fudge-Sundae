@@ -1,19 +1,22 @@
 package com.bubbles.hotfudge.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.bubbles.hotfudge.HotFudgeSundae;
 
 //TODO: Swap out with a database implementation
-//TODO: Unit tests
 public class GenericHotFudgeSundaeDAO implements HotFudgeSundaeDAO {
 	
-	ArrayList<HotFudgeSundae> sundaes = new ArrayList<HotFudgeSundae>();
+	private List<HotFudgeSundae> sundaes;
+	
+	public GenericHotFudgeSundaeDAO(List<HotFudgeSundae> sundaes) {
+		this.sundaes = sundaes;
+	}
 
 	@Override
 	public void add(HotFudgeSundae sundae) {
 		sundaes.add(sundae);
+		sundae.setId(sundaes.size() - 1);
 	}
 
 	@Override
