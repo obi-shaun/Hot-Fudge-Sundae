@@ -3,20 +3,38 @@ package com.bubbles.hotfudge.api;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
+import java.util.ArrayList;
+
+import com.bubbles.hotfudge.HotFudgeSundae;
+import com.bubbles.hotfudge.Review;
+import com.bubbles.hotfudge.model.GenericHotFudgeSundaeDAO;
+import com.bubbles.hotfudge.model.GenericReviewDAO;
+import com.google.gson.Gson;
+
 
 public class HotFudgeSundaeAPI {
 	
+	//TODO: Create API tests
+	//TODO: Set HTTP status codes
 	public static void main(String[] args) {
+		//TODO: Replace with database implementation
+		ArrayList<HotFudgeSundae> sundaes = new ArrayList<HotFudgeSundae>();
+		ArrayList<Review> reviews = new ArrayList<Review>();
+		GenericHotFudgeSundaeDAO sundaeDAO = new GenericHotFudgeSundaeDAO(sundaes);
+		GenericReviewDAO reviewDAO = new GenericReviewDAO(reviews);
+		////////////////////////////////////////////
+		
+		Gson gson = new Gson();
 		
 		get("/sundaes", (req, res) -> {
-			//TODO: retrieve all HotFudgeSundaes
-			return null;
-		});
+			return sundaeDAO.findAll();
+		}, gson::toJson);
 		
 		post("/sundaes", (req, res) -> {
-			//TODO: create a new HotFudgeSundae
-			return null;
-		});
+			HotFudgeSundae sundae = gson.fromJson(req.body(), HotFudgeSundae.class);
+			sundaeDAO.add(sundae);
+			return sundae;
+		}, gson::toJson);
 		
 		get("/sundaes/:id", (req, res) -> {
 			//TODO: retrieve HotFudgeSundae with given id
@@ -29,7 +47,7 @@ public class HotFudgeSundaeAPI {
 		});
 		
 		post("/sundaes/:id/reviews", (req, res) -> {
-			//TODO: create a review for a HotFudgeSundae with given id
+			//TODO: create a new review for a HotFudgeSundae with given id
 			return null;
 		});
 		
