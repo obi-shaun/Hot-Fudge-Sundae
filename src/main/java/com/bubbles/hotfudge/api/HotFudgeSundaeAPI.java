@@ -18,10 +18,8 @@ public class HotFudgeSundaeAPI {
 	//TODO: Set HTTP status codes
 	public static void main(String[] args) {
 		//TODO: Replace with database implementation
-		ArrayList<HotFudgeSundae> sundaes = new ArrayList<HotFudgeSundae>();
-		ArrayList<Review> reviews = new ArrayList<Review>();
-		GenericHotFudgeSundaeDAO sundaeDAO = new GenericHotFudgeSundaeDAO(sundaes);
-		GenericReviewDAO reviewDAO = new GenericReviewDAO(reviews);
+		GenericHotFudgeSundaeDAO sundaeDAO = new GenericHotFudgeSundaeDAO(new ArrayList<HotFudgeSundae>());
+		GenericReviewDAO reviewDAO = new GenericReviewDAO(new ArrayList<Review>());
 		////////////////////////////////////////////
 		
 		Gson gson = new Gson();
