@@ -16,10 +16,9 @@ public class HotFudgeSundaeAPI {
 	
 	//TODO: Create API tests
 	//TODO: Set HTTP status codes
+	//TODO: Switch to Jackson implementation for marshalling
 	public static void main(String[] args) {
 		//TODO: Replace with database implementation
-		ArrayList<HotFudgeSundae> sundaes = new ArrayList<HotFudgeSundae>();
-		ArrayList<Review> reviews = new ArrayList<Review>();
 		GenericHotFudgeSundaeDAO sundaeDAO = new GenericHotFudgeSundaeDAO(sundaes);
 		GenericReviewDAO reviewDAO = new GenericReviewDAO(reviews);
 		////////////////////////////////////////////
@@ -37,19 +36,18 @@ public class HotFudgeSundaeAPI {
 		}, gson::toJson);
 		
 		get("/sundaes/:id", (req, res) -> {
-			//TODO: retrieve HotFudgeSundae with given id
-			return null;
-		});
+			return sundaeDAO.find(Integer.parseInt(req.params("id")));
+		}, gson::toJson);
 		
 		get("/sundaes/:id/reviews", (req, res) -> {
-			//TODO: retrieve all reviews for a HotFudgeSundae with given id
-			return null;
-		});
+			return reviewDAO.findAll(Integer.parseInt(req.params("id")));
+		}, gson::toJson);
 		
 		post("/sundaes/:id/reviews", (req, res) -> {
-			//TODO: create a new review for a HotFudgeSundae with given id
-			return null;
-		});
+			Review review = gson.fromJson(req.body(), Review.class);
+			reviewDAO.add(review);
+			return review;
+		}, gson::toJson);
 		
 	}
 	
