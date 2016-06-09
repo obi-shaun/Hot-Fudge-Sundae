@@ -19,8 +19,8 @@ public class HotFudgeSundaeAPI {
 	//TODO: Switch to Jackson implementation for marshalling
 	public static void main(String[] args) {
 		//TODO: Replace with database implementation
-		GenericHotFudgeSundaeDAO sundaeDAO = new GenericHotFudgeSundaeDAO(sundaes);
-		GenericReviewDAO reviewDAO = new GenericReviewDAO(reviews);
+		GenericHotFudgeSundaeDAO sundaeDAO = new GenericHotFudgeSundaeDAO(new ArrayList<HotFudgeSundae>());
+		GenericReviewDAO reviewDAO = new GenericReviewDAO(new ArrayList<Review>());
 		////////////////////////////////////////////
 		
 		Gson gson = new Gson();
