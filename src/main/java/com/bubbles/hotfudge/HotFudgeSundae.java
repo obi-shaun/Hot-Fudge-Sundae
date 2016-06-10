@@ -1,13 +1,18 @@
 package com.bubbles.hotfudge;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class HotFudgeSundae {
 
 	private String restaurantName;
 	private boolean brownie;
 	private double price;
 	private int id;
-
-	public HotFudgeSundae(String restaurantName, boolean brownie, double price) {
+	
+	@JsonCreator
+	public HotFudgeSundae(@JsonProperty("restaurantName") String restaurantName, 
+			@JsonProperty("brownie") boolean brownie, @JsonProperty("price") double price) {
 		this.restaurantName = restaurantName;
 		this.brownie = brownie;
 		this.price = price;

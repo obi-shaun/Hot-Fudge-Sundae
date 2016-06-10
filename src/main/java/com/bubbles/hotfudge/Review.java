@@ -1,5 +1,8 @@
 package com.bubbles.hotfudge;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Review {
 	
 	private String comment;
@@ -9,7 +12,9 @@ public class Review {
 	private static final int MINIMUM_RATING = 1;
 	private static final int MAXIMUM_RATING = 5;
 
-	public Review(String comment, int rating, int sundaeId) {
+	@JsonCreator
+	public Review(@JsonProperty("comment") String comment, 
+			@JsonProperty("rating") int rating, @JsonProperty("sundaeId") int sundaeId) {
 		this.comment = validateComment(comment);
 		this.rating = validateRating(rating);
 		this.sundaeId = sundaeId;
