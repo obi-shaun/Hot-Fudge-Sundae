@@ -6,6 +6,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.bubbles.hotfudge.model.HotFudgeSundae;
+import com.bubbles.hotfudge.model.Review;
+
 public class ReviewTest {	
 	
 	private HotFudgeSundae sundae;

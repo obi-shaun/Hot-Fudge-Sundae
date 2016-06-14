@@ -7,16 +7,18 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bubbles.hotfudge.model.GenericHotFudgeSundaeDAO;
-import com.bubbles.hotfudge.model.GenericReviewDAO;
+import com.bubbles.hotfudge.dao.impl.GenericHotFudgeSundaeImpl;
+import com.bubbles.hotfudge.dao.impl.GenericReviewImpl;
+import com.bubbles.hotfudge.model.HotFudgeSundae;
+import com.bubbles.hotfudge.model.Review;
 
 public class GenericReviewDAOTest {
 	
 	private ArrayList<HotFudgeSundae> sundaes;
 	private ArrayList<Review> reviews;
 	
-	private GenericHotFudgeSundaeDAO sundaeDAO;
-	private GenericReviewDAO reviewDAO;
+	private GenericHotFudgeSundaeImpl sundaeDAO;
+	private GenericReviewImpl reviewDAO;
 	
 	private HotFudgeSundae deliaSundae;
 	private HotFudgeSundae rubySundae;
@@ -29,7 +31,7 @@ public class GenericReviewDAOTest {
 	public void initialize() {
 		//create and populate sundaes
 		sundaes = new ArrayList<HotFudgeSundae>();
-		sundaeDAO = new GenericHotFudgeSundaeDAO(sundaes);
+		sundaeDAO = new GenericHotFudgeSundaeImpl(sundaes);
 		deliaSundae = new HotFudgeSundae("Delia's",true,5.99);
 		rubySundae = new HotFudgeSundae("Ruby Tuesday",true,4.99);
 		mcdonaldsSundae = new HotFudgeSundae("Mcdonald's",false,1.00);
@@ -39,7 +41,7 @@ public class GenericReviewDAOTest {
 
 		//create and populate reviews
 		reviews = new ArrayList<Review>();
-		reviewDAO = new GenericReviewDAO(reviews);
+		reviewDAO = new GenericReviewImpl(reviews);
 		deliaReview = new Review("Delia's is okay.", 3, deliaSundae.getId());
 		rubyReview = new Review("Ruby Tuesday's is great", 4, rubySundae.getId());
 		reviewDAO.add(deliaReview);

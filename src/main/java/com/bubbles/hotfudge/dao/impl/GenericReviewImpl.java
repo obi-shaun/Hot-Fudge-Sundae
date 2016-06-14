@@ -1,16 +1,17 @@
-package com.bubbles.hotfudge.model;
+package com.bubbles.hotfudge.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bubbles.hotfudge.Review;
+import com.bubbles.hotfudge.dao.ReviewDAO;
+import com.bubbles.hotfudge.model.Review;
 
 //TODO: Swap out with a database implementation
-public class GenericReviewDAO implements ReviewDAO {
+public class GenericReviewImpl implements ReviewDAO {
 	
 	private List<Review> reviews;
 	
-	public GenericReviewDAO(List<Review> reviews) {
+	public GenericReviewImpl(List<Review> reviews) {
 		this.reviews = reviews;
 	}
 

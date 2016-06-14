@@ -1,8 +1,8 @@
-package com.bubbles.hotfudge.model;
+package com.bubbles.hotfudge.dao;
 
 import java.util.List;
 
-import com.bubbles.hotfudge.Review;
+import com.bubbles.hotfudge.model.Review;
 
 //TODO: Exception handling
 public interface ReviewDAO {
