@@ -10,6 +10,8 @@ import org.junit.Test;
 import com.bubbles.hotfudge.dao.impl.GenericHotFudgeSundaeImpl;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 
+
+//TODO: Update tests
 public class GenericHotFudgeSundaeDAOTest {
 	
 	private ArrayList<HotFudgeSundae> sundaes;

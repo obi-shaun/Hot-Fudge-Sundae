@@ -3,6 +3,11 @@ package com.bubbles.hotfudge.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/*
+ * This class serves as a model for all
+ * http errors for the purpose of being transformed to
+ * json before returning to user.
+ */
 public class HotFudgeError {
 	
 	private String message;

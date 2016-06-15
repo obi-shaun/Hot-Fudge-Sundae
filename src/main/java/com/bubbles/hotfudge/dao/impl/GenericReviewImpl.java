@@ -18,6 +18,7 @@ public class GenericReviewImpl implements ReviewDAO {
 	@Override
 	public void add(Review review) {
 		reviews.add(review);
+		review.setId(reviews.size() - 1);
 	}
 
 	@Override
@@ -29,6 +30,11 @@ public class GenericReviewImpl implements ReviewDAO {
 			}
 		}
 		return filteredReviews;
+	}
+
+	@Override
+	public int getCount() {
+		return reviews.size();
 	}
 	
 }

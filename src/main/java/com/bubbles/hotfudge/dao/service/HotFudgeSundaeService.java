@@ -5,17 +5,21 @@ import java.util.List;
 import com.bubbles.hotfudge.dao.HotFudgeSundaeDAO;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 
+//TODO: enforce constraints and business logic
 public class HotFudgeSundaeService {
 	
 	private HotFudgeSundaeDAO sundaeDAO; 
-	
+
 	public HotFudgeSundaeService(HotFudgeSundaeDAO sundaeDAO) {
 		this.sundaeDAO = sundaeDAO;
 	}
 	
-	public HotFudgeSundae addNewSundae(HotFudgeSundae sundae) {
-		sundae.setId(sundaeDAO.add(sundae));
-		return sundae;
+	public HotFudgeSundaeDAO getSundaeDAO() {
+		return sundaeDAO;
+	}
+	
+	public void addNewSundae(HotFudgeSundae sundae) {
+		sundaeDAO.add(sundae);
 	}
 	
 	public List<HotFudgeSundae> getSundaes() {
@@ -23,14 +27,7 @@ public class HotFudgeSundaeService {
 	}
 	
 	public HotFudgeSundae getSundae(int id) {
-		if (validateId(id)) {
 			return sundaeDAO.find(id);
-		}
-		return null;
-	}
-
-	private boolean validateId(int id) {
-		return id >= 0 && id < sundaeDAO.getCount();
 	}
 	
 }

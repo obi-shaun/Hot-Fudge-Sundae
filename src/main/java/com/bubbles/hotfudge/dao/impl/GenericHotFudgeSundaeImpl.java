@@ -15,14 +15,13 @@ public class GenericHotFudgeSundaeImpl implements HotFudgeSundaeDAO {
 	}
 
 	@Override
-	public int add(HotFudgeSundae sundae) {
+	public void add(HotFudgeSundae sundae) {
 		sundaes.add(sundae);
-		return sundaes.size() - 1;
+		sundae.setId(sundaes.size() - 1);
 	}
 
 	@Override
 	public HotFudgeSundae find(int id) {
-		System.out.println("NULLIFYYYYY");
 		return sundaes.get(id);
 	}
 

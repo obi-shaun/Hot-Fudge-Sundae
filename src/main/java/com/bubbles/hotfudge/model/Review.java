@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Review {
 	
+	private int id;
 	private String comment;
 	private int rating;
 	private int sundaeId;
@@ -15,21 +16,29 @@ public class Review {
 	@JsonCreator
 	public Review(@JsonProperty("comment") String comment, 
 			@JsonProperty("rating") int rating, @JsonProperty("sundaeId") int sundaeId) {
-		this.comment = validateComment(comment);
-		this.rating = validateRating(rating);
+		this.comment = comment;
+		this.rating = rating;
 		this.sundaeId = sundaeId;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public void setComment(String comment) {
-		this.comment = validateComment(comment);
+		this.comment = comment;
 	}
 	
 	public void setRating(int rating) {
-		this.rating = validateRating(rating);
+		this.rating = rating;
 	}
 	
 	public void setSundaeId(int sundaeId) {
 		this.sundaeId = sundaeId;
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	public String getComment() {
@@ -56,30 +65,6 @@ public class Review {
 		return MINIMUM_RATING;
 	}
 
-	private String validateComment(String comment) {
-		int commentLength = comment.length();
-		if (commentLength > CHARACTER_LIMIT) { 
-			return comment.substring(0, CHARACTER_LIMIT);
-		}
-		return comment;
-	}
-	
-	private int validateRating(int rating) {
-		if (rating < MINIMUM_RATING){
-			return MINIMUM_RATING;
-		}
-		if (rating > MAXIMUM_RATING){
-			return MAXIMUM_RATING;
-		}
-		return rating;
-	}
-	
-	private boolean validateSundaeId(int sundaeId) {
-		//TODO: implement validation of sundaeId
-		return false;
-	}
-
-	//TODO: review Eclipse auto generated hashCode()
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,7 +75,6 @@ public class Review {
 		return result;
 	}
 
-	//TODO: review Eclipse auto generated equals()
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,6 +95,7 @@ public class Review {
 			return false;
 		return true;
 	}
+
 	
 	//TODO: override toString()
 	

@@ -2,10 +2,12 @@ package com.bubbles.hotfudge.exception;
 
 public class HotFudgeServiceException extends Exception {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Exception originalException;
 	
-	public HotFudgeServiceException() {}
-
 	public HotFudgeServiceException(String message) {
 	    super(message);
 	}

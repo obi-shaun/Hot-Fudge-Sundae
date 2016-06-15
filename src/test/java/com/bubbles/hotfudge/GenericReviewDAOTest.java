@@ -12,6 +12,7 @@ import com.bubbles.hotfudge.dao.impl.GenericReviewImpl;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 import com.bubbles.hotfudge.model.Review;
 
+//TODO: Update Tests
 public class GenericReviewDAOTest {
 	
 	private ArrayList<HotFudgeSundae> sundaes;

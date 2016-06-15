@@ -50,7 +50,6 @@ public class HotFudgeSundae {
 		return price;
 	}
 	
-	//TODO: review Eclipse auto generated hashCode()
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,7 +63,6 @@ public class HotFudgeSundae {
 		return result;
 	}
 
-	//TODO: review Eclipse auto generated equals()
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
