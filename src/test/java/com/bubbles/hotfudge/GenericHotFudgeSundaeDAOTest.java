@@ -7,19 +7,22 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bubbles.hotfudge.model.GenericHotFudgeSundaeDAO;
+import com.bubbles.hotfudge.dao.impl.GenericHotFudgeSundaeImpl;
+import com.bubbles.hotfudge.model.HotFudgeSundae;
 
+
+//TODO: Update tests
 public class GenericHotFudgeSundaeDAOTest {
 	
 	private ArrayList<HotFudgeSundae> sundaes;
-	private GenericHotFudgeSundaeDAO sundaeDAO;
+	private GenericHotFudgeSundaeImpl sundaeDAO;
 	private HotFudgeSundae deliaSundae;
 	private HotFudgeSundae rubySundae;
 
 	@Before
 	public void initialize() {
 		sundaes = new ArrayList<HotFudgeSundae>();
-		sundaeDAO = new GenericHotFudgeSundaeDAO(sundaes);
+		sundaeDAO = new GenericHotFudgeSundaeImpl(sundaes);
 		deliaSundae = new HotFudgeSundae("Delia's",true,5.99);
 		rubySundae = new HotFudgeSundae("Ruby Tuesday",true,4.99);
 		sundaeDAO.add(deliaSundae);

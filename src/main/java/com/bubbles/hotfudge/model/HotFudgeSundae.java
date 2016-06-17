@@ -1,4 +1,7 @@
-package com.bubbles.hotfudge;
+package com.bubbles.hotfudge.model;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class HotFudgeSundae {
 
@@ -6,8 +9,10 @@ public class HotFudgeSundae {
 	private boolean brownie;
 	private double price;
 	private int id;
-
-	public HotFudgeSundae(String restaurantName, boolean brownie, double price) {
+	
+	@JsonCreator
+	public HotFudgeSundae(@JsonProperty("restaurantName") String restaurantName, 
+			@JsonProperty("brownie") boolean brownie, @JsonProperty("price") double price) {
 		this.restaurantName = restaurantName;
 		this.brownie = brownie;
 		this.price = price;
@@ -45,7 +50,6 @@ public class HotFudgeSundae {
 		return price;
 	}
 	
-	//TODO: review Eclipse auto generated hashCode()
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -59,7 +63,6 @@ public class HotFudgeSundae {
 		return result;
 	}
 
-	//TODO: review Eclipse auto generated equals()
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

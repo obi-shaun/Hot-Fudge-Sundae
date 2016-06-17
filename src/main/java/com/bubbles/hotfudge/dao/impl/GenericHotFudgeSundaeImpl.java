@@ -1,15 +1,16 @@
-package com.bubbles.hotfudge.model;
+package com.bubbles.hotfudge.dao.impl;
 
 import java.util.List;
 
-import com.bubbles.hotfudge.HotFudgeSundae;
+import com.bubbles.hotfudge.dao.HotFudgeSundaeDAO;
+import com.bubbles.hotfudge.model.HotFudgeSundae;
 
 //TODO: Swap out with a database implementation
-public class GenericHotFudgeSundaeDAO implements HotFudgeSundaeDAO {
+public class GenericHotFudgeSundaeImpl implements HotFudgeSundaeDAO {
 	
 	private List<HotFudgeSundae> sundaes;
 	
-	public GenericHotFudgeSundaeDAO(List<HotFudgeSundae> sundaes) {
+	public GenericHotFudgeSundaeImpl(List<HotFudgeSundae> sundaes) {
 		this.sundaes = sundaes;
 	}
 
@@ -27,6 +28,11 @@ public class GenericHotFudgeSundaeDAO implements HotFudgeSundaeDAO {
 	@Override
 	public List<HotFudgeSundae> findAll() {
 		return sundaes;
+	}
+	
+	@Override
+	public int getCount() {
+		return sundaes.size();
 	}
 	
 }

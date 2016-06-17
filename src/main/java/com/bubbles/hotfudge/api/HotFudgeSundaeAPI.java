@@ -1,54 +1,71 @@
 package com.bubbles.hotfudge.api;
 
+import static spark.Spark.after;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
 import java.util.ArrayList;
 
-import com.bubbles.hotfudge.HotFudgeSundae;
-import com.bubbles.hotfudge.Review;
-import com.bubbles.hotfudge.model.GenericHotFudgeSundaeDAO;
-import com.bubbles.hotfudge.model.GenericReviewDAO;
-import com.google.gson.Gson;
+import com.bubbles.hotfudge.dao.impl.GenericHotFudgeSundaeImpl;
+import com.bubbles.hotfudge.dao.impl.GenericReviewImpl;
+import com.bubbles.hotfudge.model.HotFudgeSundae;
+import com.bubbles.hotfudge.model.Review;
+import com.bubbles.hotfudge.service.HotFudgeSundaeService;
+import com.bubbles.hotfudge.service.ReviewService;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class HotFudgeSundaeAPI {
-	
+		
 	//TODO: Create API tests
-	//TODO: Set HTTP status codes
+	//TODO: Implement exception handling
+	//TODO: Return errors wrapped in json
+	//TODO: Create enums for content type and status codes
+	//TODO: Swap generic impls with database impls
 	public static void main(String[] args) {
-		//TODO: Replace with database implementation
-		GenericHotFudgeSundaeDAO sundaeDAO = new GenericHotFudgeSundaeDAO(new ArrayList<HotFudgeSundae>());
-		GenericReviewDAO reviewDAO = new GenericReviewDAO(new ArrayList<Review>());
-		////////////////////////////////////////////
 		
-		Gson gson = new Gson();
+		HotFudgeSundaeService sundaeService = 
+				new HotFudgeSundaeService(
+						new GenericHotFudgeSundaeImpl(
+								new ArrayList<HotFudgeSundae>()));
 		
-		get("/sundaes", (req, res) -> {
-			return sundaeDAO.findAll();
-		}, gson::toJson);
+		ReviewService reviewService = 
+				new ReviewService(
+						new GenericReviewImpl(
+								new ArrayList<Review>()), sundaeService.getSundaeDAO());
 		
-		post("/sundaes", (req, res) -> {
-			HotFudgeSundae sundae = gson.fromJson(req.body(), HotFudgeSundae.class);
-			sundaeDAO.add(sundae);
+		ObjectMapper objMapper = new ObjectMapper();
+								
+		get("/sundaes", "application/json", (req, res) -> {
+			return sundaeService.getSundaes();
+		}, objMapper::writeValueAsString);
+		
+		post("/sundaes", "application/json", (req, res) -> {
+			HotFudgeSundae sundae = objMapper.readValue(req.body(), HotFudgeSundae.class);
+			sundaeService.addNewSundae(sundae);
 			return sundae;
-		}, gson::toJson);
+		}, objMapper::writeValueAsString);
 		
-		get("/sundaes/:id", (req, res) -> {
-			//TODO: retrieve HotFudgeSundae with given id
-			return null;
+		get("/sundaes/:id", "application/json", (req, res) -> {
+			return sundaeService.getSundae(Integer.parseInt(req.params("id")));
+		}, objMapper::writeValueAsString);
+		
+		get("/sundaes/:id/reviews", "application/json", (req, res) -> {
+			return reviewService.getReviewsForSundae(Integer.parseInt(req.params("id")));
+		}, objMapper::writeValueAsString);
+		
+		post("/sundaes/:id/reviews", "application/json", (req, res) -> {
+			int sundaeId = Integer.parseInt(req.params("id"));
+			Review review = objMapper.readValue(req.body(), Review.class);
+			reviewService.addReview(review, sundaeId);
+			return review;
+		}, objMapper::writeValueAsString);
+		
+		after((req, res) -> {
+			res.type("application/json");
 		});
-		
-		get("/sundaes/:id/reviews", (req, res) -> {
-			//TODO: retrieve all reviews for a HotFudgeSundae with given id
-			return null;
-		});
-		
-		post("/sundaes/:id/reviews", (req, res) -> {
-			//TODO: create a new review for a HotFudgeSundae with given id
-			return null;
-		});
-		
+
 	}
 	
 }
