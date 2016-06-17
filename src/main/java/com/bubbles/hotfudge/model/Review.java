@@ -15,7 +15,12 @@ public class Review {
 
 	@JsonCreator
 	public Review(@JsonProperty("comment") String comment, 
-			@JsonProperty("rating") int rating, @JsonProperty("sundaeId") int sundaeId) {
+			@JsonProperty("rating") int rating) {
+		this.comment = comment;
+		this.rating = rating;
+	}
+	
+	public Review(String comment, int rating, int sundaeId) {
 		this.comment = comment;
 		this.rating = rating;
 		this.sundaeId = sundaeId;

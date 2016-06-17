@@ -1,4 +1,4 @@
-package com.bubbles.hotfudge.dao.service;
+package com.bubbles.hotfudge.service;
 
 import java.util.List;
 
@@ -13,9 +13,11 @@ public class ReviewService {
 	
 	public ReviewService(ReviewDAO reviewDAO, HotFudgeSundaeDAO sundaeDAO) {
 		this.reviewDAO = reviewDAO;
+		this.sundaeDAO = sundaeDAO;
 	}
 	
-	public void addReview(Review review) {
+	public void addReview(Review review, int sundaeId) {
+		review.setSundaeId(sundaeId);
 		if (sundaeIdIsValid(review.getSundaeId())) {
 			review.setRating(enforceRatingLimits(review.getRating()));
 			review.setComment(enforceCommentLength(review.getComment()));

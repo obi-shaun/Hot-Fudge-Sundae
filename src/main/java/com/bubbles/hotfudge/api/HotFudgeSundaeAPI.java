@@ -8,18 +8,20 @@ import java.util.ArrayList;
 
 import com.bubbles.hotfudge.dao.impl.GenericHotFudgeSundaeImpl;
 import com.bubbles.hotfudge.dao.impl.GenericReviewImpl;
-import com.bubbles.hotfudge.dao.service.HotFudgeSundaeService;
-import com.bubbles.hotfudge.dao.service.ReviewService;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 import com.bubbles.hotfudge.model.Review;
+import com.bubbles.hotfudge.service.HotFudgeSundaeService;
+import com.bubbles.hotfudge.service.ReviewService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class HotFudgeSundaeAPI {
 		
 	//TODO: Create API tests
+	//TODO: Implement exception handling
 	//TODO: Return errors wrapped in json
-	//TODO: Create enum for status codes to be used
-	//TODO: Create enum for content types to be used
+	//TODO: Create enums for content type and status codes
 	//TODO: Swap generic impls with database impls
 	public static void main(String[] args) {
 		
@@ -34,7 +36,7 @@ public class HotFudgeSundaeAPI {
 								new ArrayList<Review>()), sundaeService.getSundaeDAO());
 		
 		ObjectMapper objMapper = new ObjectMapper();
-				
+								
 		get("/sundaes", "application/json", (req, res) -> {
 			return sundaeService.getSundaes();
 		}, objMapper::writeValueAsString);
@@ -54,11 +56,9 @@ public class HotFudgeSundaeAPI {
 		}, objMapper::writeValueAsString);
 		
 		post("/sundaes/:id/reviews", "application/json", (req, res) -> {
+			int sundaeId = Integer.parseInt(req.params("id"));
 			Review review = objMapper.readValue(req.body(), Review.class);
-			System.out.println(review);
-			System.out.println(review.getComment());
-			reviewService.addReview(review);
-			System.out.println("FUCK! ");
+			reviewService.addReview(review, sundaeId);
 			return review;
 		}, objMapper::writeValueAsString);
 		

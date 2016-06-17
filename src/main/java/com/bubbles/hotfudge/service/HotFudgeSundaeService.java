@@ -1,4 +1,4 @@
-package com.bubbles.hotfudge.dao.service;
+package com.bubbles.hotfudge.service;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class HotFudgeSundaeService {
 	}
 	
 	public HotFudgeSundae getSundae(int id) {
-			return sundaeDAO.find(id);
+		return sundaeDAO.find(id);
 	}
 	
 }
