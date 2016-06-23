@@ -1,6 +1,7 @@
 package com.bubbles.hotfudge.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Review {
@@ -38,6 +39,7 @@ public class Review {
 		this.rating = rating;
 	}
 	
+	@JsonIgnore
 	public void setSundaeId(int sundaeId) {
 		this.sundaeId = sundaeId;
 	}
