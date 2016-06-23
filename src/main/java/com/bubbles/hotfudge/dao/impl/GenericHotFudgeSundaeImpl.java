@@ -22,7 +22,12 @@ public class GenericHotFudgeSundaeImpl implements HotFudgeSundaeDAO {
 
 	@Override
 	public HotFudgeSundae find(int id) {
-		return sundaes.get(id);
+		try {
+			return sundaes.get(id);
+		}
+		catch(IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	@Override
