@@ -15,6 +15,8 @@ import com.bubbles.hotfudge.service.HotFudgeSundaeService;
 import com.bubbles.hotfudge.service.ReviewService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import spark.Request;
+
 
 public class HotFudgeSundaeAPI {
 		
@@ -47,17 +49,16 @@ public class HotFudgeSundaeAPI {
 		}, objMapper::writeValueAsString);
 		
 		get("/sundaes/:id", ContentType.APPLICATION_JSON, (req, res) -> {
-			return sundaeService.getSundae(Integer.parseInt(req.params("id")));
+			return sundaeService.getSundae(getIdFromPath(req));
 		}, objMapper::writeValueAsString);
 		
 		get("/sundaes/:id/reviews", ContentType.APPLICATION_JSON, (req, res) -> {
-			return reviewService.getReviewsForSundae(Integer.parseInt(req.params("id")));
+			return reviewService.getReviewsForSundae(getIdFromPath(req));
 		}, objMapper::writeValueAsString);
 		
 		post("/sundaes/:id/reviews", ContentType.APPLICATION_JSON, (req, res) -> {
-			int sundaeId = Integer.parseInt(req.params("id"));
 			Review review = objMapper.readValue(req.body(), Review.class);
-			reviewService.addReview(review, sundaeId);
+			reviewService.addReview(review, getIdFromPath(req));
 			return review;
 		}, objMapper::writeValueAsString);
 		
@@ -65,6 +66,10 @@ public class HotFudgeSundaeAPI {
 			res.type(ContentType.APPLICATION_JSON);
 		});
 
+	}
+	
+	private static int getIdFromPath(Request req) {
+		return Integer.parseInt(req.params("id"));
 	}
 	
 }
