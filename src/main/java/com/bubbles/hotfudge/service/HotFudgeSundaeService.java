@@ -20,11 +20,9 @@ public class HotFudgeSundaeService {
 	}
 
 	public void addNewSundae(HotFudgeSundae sundae) {
-		String restaurant = sundae.getRestaurantName();
-		double price = sundae.getPrice();
-		if (restaurantNameIsValid(restaurant) && priceIsValid(price)) {
+		if (sundaeIsValid(sundae)) {
 			sundae.setRestaurantName(
-					enforceRestaurantNameLength(restaurant, HotFudgeSundae.getRestaurantNameCharLimit()));
+					enforceRestaurantNameLength(sundae.getRestaurantName(), HotFudgeSundae.getRestaurantNameCharLimit()));
 			sundaeDAO.add(sundae);
 		}
 		else {
@@ -38,6 +36,11 @@ public class HotFudgeSundaeService {
 
 	public HotFudgeSundae getSundae(int id) {
 		return sundaeDAO.find(id);
+	}
+	
+	private boolean sundaeIsValid(HotFudgeSundae sundae) {
+		return restaurantNameIsValid(sundae.getRestaurantName()) 
+				&& priceIsValid(sundae.getPrice());
 	}
 	
 	private boolean restaurantNameIsValid(String restaurantName) {
