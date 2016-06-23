@@ -9,6 +9,7 @@ public class HotFudgeSundae {
 	private boolean brownie;
 	private double price;
 	private int id;
+	private static final int RESTAURANT_NAME_CHAR_LIMIT = 70;
 	
 	@JsonCreator
 	public HotFudgeSundae(@JsonProperty("restaurantName") String restaurantName, 
@@ -48,6 +49,10 @@ public class HotFudgeSundae {
 	
 	public double getPrice() {
 		return price;
+	}
+	
+	public static int getRestaurantNameCharLimit() {
+		return RESTAURANT_NAME_CHAR_LIMIT;
 	}
 	
 	@Override

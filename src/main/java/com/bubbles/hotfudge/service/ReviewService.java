@@ -5,6 +5,8 @@ import java.util.List;
 import com.bubbles.hotfudge.dao.HotFudgeSundaeDAO;
 import com.bubbles.hotfudge.dao.ReviewDAO;
 import com.bubbles.hotfudge.model.Review;
+import com.bubbles.hotfudge.utils.HotFudgeSanitizer;
+import com.bubbles.hotfudge.utils.HotFudgeValidator;
 
 public class ReviewService {
 
@@ -17,11 +19,14 @@ public class ReviewService {
 	}
 	
 	public void addReview(Review review, int sundaeId) {
-		review.setSundaeId(sundaeId);
-		if (sundaeIdIsValid(review.getSundaeId())) {
+		if (reviewIsValid(review, sundaeId)) {
+			review.setId(sundaeId);
 			review.setRating(enforceRatingLimits(review.getRating()));
 			review.setComment(enforceCommentLength(review.getComment()));
 			reviewDAO.add(review);
+		}
+		else {
+			System.out.println("Invalid review... replace me with a custom exception!");
 		}
 	}
 	
@@ -29,26 +34,21 @@ public class ReviewService {
 		return reviewDAO.findAll(sundaeId);
 	}
 	
+	private boolean reviewIsValid(Review review, int sundaeId) {
+		return sundaeIdIsValid(sundaeId) &&
+				HotFudgeValidator.userStringIsNotEmpty(review.getComment());
+	}
+	
 	private boolean sundaeIdIsValid(int sundaeId) {
 		return sundaeDAO.find(sundaeId) != null;
 	}
 	
 	private String enforceCommentLength(String comment) {
-		int commentLength = comment.length();
-		if (commentLength > Review.getCharacterLimit()) { 
-			return comment.substring(0, Review.getCharacterLimit());
-		}
-		return comment;
-	}
+		return HotFudgeSanitizer.enforceCharacterLimit(comment, Review.getCharacterLimit());
+	} 
 	
 	private int enforceRatingLimits(int rating) {
-		if (rating < Review.getMinimumRating()){
-			return Review.getMinimumRating();
-		}
-		if (rating > Review.getMaximumRating()){
-			return Review.getMaximumRating();
-		}
-		return rating;
+		return HotFudgeSanitizer.enforceRange(rating, Review.getMinimumRating(), Review.getMaximumRating());
 	}
 	
 }
