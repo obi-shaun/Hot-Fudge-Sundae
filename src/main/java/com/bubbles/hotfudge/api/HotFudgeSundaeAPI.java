@@ -27,8 +27,9 @@ import spark.Request;
 public class HotFudgeSundaeAPI {
 		
 	//TODO: Create API tests
-	//TODO: Complete exception handling
-	//TODO: Return errors wrapped in json
+	//TODO: Finish exception handling
+	//TODO: Finish returning errors wrapped in json
+	//TODO: Finish setting http status codes
 	//TODO: Swap generic impls with database impls
 	public static void main(String[] args) {
 		
@@ -54,7 +55,7 @@ public class HotFudgeSundaeAPI {
 				sundaeService.addNewSundae(sundae);
 			}
 			catch (HotFudgeServiceException e) {
-				throw new HotFudgeException(e.getMessage(), HttpStatusCode.INTERNAL_ERROR);
+				throw new HotFudgeException(e.getMessage(), HttpStatusCode.INTERNAL_SERVER_ERROR);
 			}
 			return sundae;
 		}, objMapper::writeValueAsString);
@@ -65,7 +66,7 @@ public class HotFudgeSundaeAPI {
 			if (sundae != null) {
 				return sundae;
 			}
-			throw new HotFudgeException("Sundae with id: " + id + " not found", HttpStatusCode.RESOURCE_NOT_FOUND);
+			throw new HotFudgeException("Sundae with id: " + id + " not found", HttpStatusCode.NOT_FOUND);
 		}, objMapper::writeValueAsString);
 		
 		get("/sundaes/:id/reviews", ContentType.APPLICATION_JSON, (req, res) -> {
