@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bubbles.hotfudge.dao.ReviewDAO;
+import com.bubbles.hotfudge.exceptions.HotFudgeDAOException;
 import com.bubbles.hotfudge.model.Review;
 
 //TODO: Swap out with a database implementation
@@ -16,9 +17,14 @@ public class GenericReviewImpl implements ReviewDAO {
 	}
 
 	@Override
-	public void add(Review review) {
-		reviews.add(review);
-		review.setId(reviews.size() - 1);
+	public void add(Review review) throws HotFudgeDAOException {
+		try {
+			reviews.add(review);
+			review.setId(reviews.size() - 1);
+		} catch (Exception e) {
+			throw new HotFudgeDAOException("Failed to add review");
+		}
+		
 	}
 
 	@Override

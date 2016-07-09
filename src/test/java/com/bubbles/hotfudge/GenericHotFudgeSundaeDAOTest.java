@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.bubbles.hotfudge.dao.impl.GenericHotFudgeSundaeImpl;
+import com.bubbles.hotfudge.exceptions.HotFudgeDAOException;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 
 
@@ -20,7 +21,7 @@ public class GenericHotFudgeSundaeDAOTest {
 	private HotFudgeSundae rubySundae;
 
 	@Before
-	public void initialize() {
+	public void initialize() throws HotFudgeDAOException {
 		sundaes = new ArrayList<HotFudgeSundae>();
 		sundaeDAO = new GenericHotFudgeSundaeImpl(sundaes);
 		deliaSundae = new HotFudgeSundae("Delia's",true,5.99);
@@ -30,7 +31,7 @@ public class GenericHotFudgeSundaeDAOTest {
 	}
 
 	@Test
-	public void add() {
+	public void add() throws HotFudgeDAOException {
 		int originalNumOfSundaes = sundaes.size();
 		HotFudgeSundae mcdonaldsSundae = new HotFudgeSundae("Mcdonald's",false,1.00);
 		sundaeDAO.add(mcdonaldsSundae);

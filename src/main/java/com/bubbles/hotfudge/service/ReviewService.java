@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.bubbles.hotfudge.dao.HotFudgeSundaeDAO;
 import com.bubbles.hotfudge.dao.ReviewDAO;
+import com.bubbles.hotfudge.exceptions.HotFudgeDAOException;
+import com.bubbles.hotfudge.exceptions.HotFudgeServiceException;
 import com.bubbles.hotfudge.model.Review;
 import com.bubbles.hotfudge.utils.HotFudgeSanitizer;
 import com.bubbles.hotfudge.utils.HotFudgeValidator;
@@ -18,18 +20,22 @@ public class ReviewService {
 		this.sundaeDAO = sundaeDAO;
 	}
 	
-	public void addReview(Review review, int sundaeId) {
+	public void addReview(Review review, int sundaeId) throws HotFudgeServiceException {
 		if (reviewIsValid(review, sundaeId)) {
 			review.setId(sundaeId);
 			review.setRating(enforceRatingLimits(review.getRating()));
 			review.setComment(enforceCommentLength(review.getComment()));
-			reviewDAO.add(review);
 		}
 		else {
-			System.out.println("Invalid review... replace me with a custom exception!");
+			throw new HotFudgeServiceException("Invalid review data!");
+		}
+		try {
+			reviewDAO.add(review);
+		} catch (HotFudgeDAOException e) {
+			throw new HotFudgeServiceException("Failed to add review");
 		}
 	}
-	
+
 	public List<Review> getReviewsForSundae(int sundaeId) {
 		return reviewDAO.findAll(sundaeId);
 	}

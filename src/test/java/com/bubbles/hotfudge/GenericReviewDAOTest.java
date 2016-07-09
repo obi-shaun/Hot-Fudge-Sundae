@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.bubbles.hotfudge.dao.impl.GenericHotFudgeSundaeImpl;
 import com.bubbles.hotfudge.dao.impl.GenericReviewImpl;
+import com.bubbles.hotfudge.exceptions.HotFudgeDAOException;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 import com.bubbles.hotfudge.model.Review;
 
@@ -29,7 +30,7 @@ public class GenericReviewDAOTest {
 	Review rubyReview;
 
 	@Before
-	public void initialize() {
+	public void initialize() throws HotFudgeDAOException {
 		//create and populate sundaes
 		sundaes = new ArrayList<HotFudgeSundae>();
 		sundaeDAO = new GenericHotFudgeSundaeImpl(sundaes);
@@ -50,7 +51,7 @@ public class GenericReviewDAOTest {
 	}
 	
 	@Test
-	public void add() {
+	public void add() throws HotFudgeDAOException {
 		int originalNumOfReviews = reviews.size();
 		Review mcdonaldsReview = new Review("Mcdonald's is amazing!", 5, mcdonaldsSundae.getId());
 		reviewDAO.add(mcdonaldsReview);

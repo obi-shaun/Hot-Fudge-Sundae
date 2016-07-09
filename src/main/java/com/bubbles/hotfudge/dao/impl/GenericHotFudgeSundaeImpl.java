@@ -3,6 +3,7 @@ package com.bubbles.hotfudge.dao.impl;
 import java.util.List;
 
 import com.bubbles.hotfudge.dao.HotFudgeSundaeDAO;
+import com.bubbles.hotfudge.exceptions.HotFudgeDAOException;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 
 //TODO: Swap out with a database implementation
@@ -15,9 +16,14 @@ public class GenericHotFudgeSundaeImpl implements HotFudgeSundaeDAO {
 	}
 
 	@Override
-	public void add(HotFudgeSundae sundae) {
-		sundaes.add(sundae);
-		sundae.setId(sundaes.size() - 1);
+	public void add(HotFudgeSundae sundae) throws HotFudgeDAOException {
+		try {
+			sundaes.add(sundae);
+			sundae.setId(sundaes.size() - 1);
+		}
+		catch(Exception e) {
+			throw new HotFudgeDAOException("Failed to add sundae");
+		}
 	}
 
 	@Override

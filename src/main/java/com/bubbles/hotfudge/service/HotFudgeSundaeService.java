@@ -3,6 +3,8 @@ package com.bubbles.hotfudge.service;
 import java.util.List;
 
 import com.bubbles.hotfudge.dao.HotFudgeSundaeDAO;
+import com.bubbles.hotfudge.exceptions.HotFudgeDAOException;
+import com.bubbles.hotfudge.exceptions.HotFudgeServiceException;
 import com.bubbles.hotfudge.model.HotFudgeSundae;
 import com.bubbles.hotfudge.utils.HotFudgeSanitizer;
 import com.bubbles.hotfudge.utils.HotFudgeValidator;
@@ -19,14 +21,18 @@ public class HotFudgeSundaeService {
 		return sundaeDAO;
 	}
 
-	public void addNewSundae(HotFudgeSundae sundae) {
-		if (sundaeIsValid(sundae)) {
-			sundae.setRestaurantName(
-					enforceRestaurantNameLength(sundae.getRestaurantName(), HotFudgeSundae.getRestaurantNameCharLimit()));
-			sundaeDAO.add(sundae);
-		}
-		else {
-			System.out.println("Invalid name or price...replace me with a custom exception!");
+	public void addNewSundae(HotFudgeSundae sundae) throws HotFudgeServiceException {
+		try {
+			if (sundaeIsValid(sundae)) {
+				sundae.setRestaurantName(enforceRestaurantNameLength(sundae.getRestaurantName(), HotFudgeSundae.getRestaurantNameCharLimit()));
+				sundaeDAO.add(sundae);
+			}
+			else {
+				throw new HotFudgeServiceException("Invalid data");
+			}
+		} 
+		catch (HotFudgeDAOException e) {
+			throw new HotFudgeServiceException("Failed to add sundae");
 		}
 	}
 
@@ -34,8 +40,8 @@ public class HotFudgeSundaeService {
 		return sundaeDAO.findAll();
 	}
 
-	public HotFudgeSundae getSundae(int id) {
-		return sundaeDAO.find(id);
+	public HotFudgeSundae getSundae(int id) throws HotFudgeServiceException {
+			return sundaeDAO.find(id);
 	}
 	
 	private boolean sundaeIsValid(HotFudgeSundae sundae) {
