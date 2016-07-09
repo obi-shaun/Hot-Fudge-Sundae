@@ -27,7 +27,7 @@ import spark.Request;
 public class HotFudgeSundaeAPI {
 		
 	//TODO: Create API tests
-	//TODO: Implement exception handling
+	//TODO: Complete exception handling
 	//TODO: Return errors wrapped in json
 	//TODO: Swap generic impls with database impls
 	public static void main(String[] args) {
